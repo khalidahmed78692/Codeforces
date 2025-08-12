@@ -14,12 +14,13 @@ void solve()
     {
         cin >> temp;
         m[temp % k]++;
+        m[k - temp % k]++;
     }
     for (int i = 0; i < n; i++)
     {
         cin >> temp;
         m[temp % k]--;
-        m[abs(temp - k) % k]--;
+        m[k - temp % k]--;
     }
     bool flag = true;
     for (auto it : m)
