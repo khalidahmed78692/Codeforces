@@ -4,39 +4,48 @@ using namespace std;
 #define ll long long
 #define lli long long int
 
-void helper(int i, int prevele, int curcount, int totalcount, vector<int> &a, int &ans)
+ll DP(ll i, vector<ll> &v, unordered_map<ll, vector<ll>> &ind, unordered_map<ll, ll> &m, vector<ll> &dp)
 {
-    if (i == a.size())
-    {
-        if (prevele == curcount)
-            totalcount += curcount;
-        ans = max(ans, totalcount);
-        return;
-    }
+    ll n = ind.size();
+    if (i == n)
+        return 0;
 
-    // take
-    if(curcount==a[i])
-        helper(i+1,-1,0,totalcount+curcount,a,ans);
-    else
-        helper(i+1,a[i],1,totalcount,a,ans);
-    
-    // not take
-    if(curcount==a[i]){
+    if (dp[i] != -1)
+        return dp[i];
 
-    }
+    ll ans = DP(i + 1, v, ind, m, dp);
+
+    ll cur = v[i];
+    ll at = m[i];
+
+    if (at + v[i] - 1 < ind[cur].size())
+        ans = max(ans, v[i] + DP(ind[cur][at + v[i] - 1] + 1, v, ind, m, dp));
+        
+
+    cout << "ans: " << ans << endl;
+    return dp[i] = ans;
 }
 
 void solve()
 {
-    int n;
+    ll n;
     cin >> n;
-    vector<int> a(n);
-    for (int i = 0; i < n; i++)
-        cin >> a[i];
 
-    int ans = 0;
-    helper(0, -1, 0, 0, a, ans);
-    cout << ans << endl;
+    unordered_map<ll, vector<ll>> ind;
+    unordered_map<ll, ll> m;
+
+    vector<ll> v(n);
+
+    for (ll i = 0; i < n; i++)
+    {
+        cin >> v[i];
+        ind[v[i]].push_back(i);
+        m[i] = ind[v[i]].size() - 1;
+    }
+
+    vector<ll> dp(n, -1);
+
+    cout << DP(0, v, ind, m, dp) << endl;
 }
 
 int main()

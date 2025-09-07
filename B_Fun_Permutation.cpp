@@ -6,21 +6,13 @@ using namespace std;
 
 void solve()
 {
-    lli n, k;
-    cin >> n >> k;
-    vector<lli> a;
-    int temp;
+    int n;
+    cin >> n;
+    int p;
     for (int i = 0; i < n; i++)
     {
-        cin >> temp;
-        a.push_back(temp);
-    }
-
-    // display output
-    for (int i = 0; i < n; i++)
-    {
-        lli ni = a[i] % (k + 1);
-        cout << a[i] + ni * k << " ";
+        cin >> p;
+        cout << n - p + 1 << " ";
     }
     cout << endl;
 }
