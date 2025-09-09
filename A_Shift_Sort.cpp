@@ -6,13 +6,24 @@ using namespace std;
 
 void solve()
 {
-    int k, x;
-    cin >> k >> x;
-    while (k--)
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    int zerocount = 0;
+    for (char c : s)
     {
-        x *= 2;
+        if (c == '0')
+            zerocount++;
     }
-    cout << x << endl;
+
+    int ans = 0;
+    for (int i = 0; i < zerocount; i++)
+    {
+        if (s[i] == '1')
+            ans++;
+    }
+    cout << ans << endl;
 }
 
 int main()

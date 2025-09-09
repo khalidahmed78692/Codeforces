@@ -6,13 +6,22 @@ using namespace std;
 
 void solve()
 {
-    int k, x;
-    cin >> k >> x;
-    while (k--)
+    int a, b;
+    cin >> a >> b;
+    int ans = 0;
+    if (a == b)
     {
-        x *= 2;
+        ans = 0;
     }
-    cout << x << endl;
+    else if (a % b == 0 || b % a == 0)
+    {
+        ans = 1;
+    }
+    else
+    {
+        ans = 2;
+    }
+    cout << ans << endl;
 }
 
 int main()
