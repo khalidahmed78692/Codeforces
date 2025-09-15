@@ -10,25 +10,12 @@ void solve()
     cin >> n >> m;
     vector<ll> a(n);
     for (ll i = 0; i < n; i++)
-    {
         cin >> a[i];
-    }
+
+    sort(a.rbegin(), a.rend());
     ll ans = 0;
-    sort(a.begin(), a.end());
-    ll times = m / n;
-    ll n1 = n;
-    for (ll i = n - 1; i >= 0; i--)
-    {
-        ans += times * a[i] * n1;
-        n1--;
-    }
-    n1 = m % n;
-    ll i = n - 1;
-    while (i >= 0 && n1 > 0)
-    {
-        ans += a[i] * n1;
-        i--, n1--;
-    }
+    for (int i = 0; i < n && m > 0; i++, m--)
+        ans += a[i] * m;
     cout << ans << endl;
 }
 

@@ -8,32 +8,33 @@ void solve()
 {
     int n;
     cin >> n;
-    ll temp;
-    unordered_map<ll,ll> st;
-    vector<int> b;
+    unordered_map<int, vector<int>> mpp;
+    vector<int> a(n), b(n);
     for (int i = 0; i < n; i++)
     {
-        cin >> temp;
-        b.push_back(temp);
-        st[temp]++;
+        cin >> b[i];
+        mpp[b[i]].push_back(i);
     }
-    ll sum = 0;
-    bool ans=true;
-    for (auto it : st){
-        if(it.second%it.first){
-            ans=false;
-            break;
+
+    int num = 1;
+    for (auto it : mpp)
+    {
+        if (it.second.size() % it.first)
+        {
+            cout << -1 << endl;
+            return;
+        }
+        int m = it.second.size();
+        int val = it.first;
+        for (int i = 0; i < m; i++)
+        {
+            a[it.second[i]] = num;
+            if ((i + 1) % val == 0)
+                num++;
         }
     }
-    if (ans)
-    {
-        for (int i = 0; i < n; i++)
-            cout << b[i] << " ";
-    }
-    else
-    {
-        cout << -1;
-    }
+    for (int i = 0; i < n; i++)
+        cout << a[i] << " ";
     cout << endl;
 }
 
